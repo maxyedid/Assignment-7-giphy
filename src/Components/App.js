@@ -6,32 +6,32 @@ import GifCard from "./GifCard";
 const baseURL = "http://api.giphy.com/v1/gifs/"
 const apiKey = "pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
 
-// Trending Search
-// trending?api_key=
-
 function App() {
-    // https://www.freecodecamp.org/news/how-to-use-axios-with-react/
     const [gifs, setGifs] = React.useState(null);
 
-    React.useEffect(() => {
-        async function getGIF() {
+    React.useEffect(async () => {
             try {
-                const request = await axios.get(baseURL
+                await axios.get(baseURL
                     + "trending?api_key="
                     + apiKey)
                     .then((response) => {
-                        setGifs(response.data.data[0].images.original.url);
+                        console.log(response.data)
+                        console.log(response.data.data[0].url);
+                        setGifs(response.data.data[0].url);
                     });
             } catch (error) {
                 console.log(error);
             }
-        }
-    },[]);
+    },[gifs]);
 
     if (!gifs) return null;
 
     return (
         <>
+        <ul>
+            {gifs.data.map(gif =>
+            <li key={gif.id}>{gif.url}</li>)}
+        </ul>
         </>
     );
 }
