@@ -23,7 +23,28 @@ function App() {
             } catch (error) {
                 console.log(error);
             }
-    },[setGifs]);
+    },[]);
+
+    async function searchGifs() {
+        try {
+            await axios.get(baseURL
+                + "search?q=" + {gifs}
+                + "&api_key=" + apiKey)
+                .then((response) => {
+                    console.log({gifs})
+                    console.log(response.data)
+                    console.log(response.data.data[0].images.original.url);
+                    setGifs(response.data);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const updateGifs = (keyword) => {
+        setGifs(keyword);
+        searchGifs();
+    }
 
     // const [{data, loading, error}, refetch] = useAxios(
     //     "http://api.giphy.com/v1/gifs/trending?api_key=pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
@@ -39,7 +60,9 @@ function App() {
         <ul>
 
         </ul>
-            {/*<SearchField />*/}
+            <SearchField
+                updateGifs={{updateGifs}}
+            />
             <h2>Trending</h2>
             {gifs.data.map(gif =>
             <img key={gif.id} src={gif.images.original.url}/>)}
