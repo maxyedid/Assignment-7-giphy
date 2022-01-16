@@ -1,38 +1,73 @@
 .App {
   text-align: center;
+  background-color: grey;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.gif-item {
+  background-color: #ffffff;
+  padding: 20px 5px 5px 5px;
+  border-radius: 5px;
+  margin: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.text-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.gifimg {
+
+  height: 150px;
+}
+
+.search-field {
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 1x;
+}
+
+.searchbar {
+  background-color: black;
   color: white;
+  height: auto;
+  text-align: center;
+  padding: 20px 0px;
 }
 
-.App-link {
-  color: #61dafb;
+h1{
+  font-size: 60px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+span{
+  width: 3px;
+  display: inline-block;
+}
+
+#searchInput{
+  height: 30px;
+  width: 250px;
+  border-radius: 0.6em;
+  text-align: center;
+  border-color: black;
+}
+
+#srch-btn {
+  height: 30px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+#rand-btn{
+  height: 30px;
+  width: 150px;
+  margin-left: 10px;
+}
+
+#srch-lbl{
+  font-size: 25px;
 }
