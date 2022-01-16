@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import useAxios from 'axios-hooks';
 import SearchField from "./SearchField";
 import GifCard from "./GifCard";
 
@@ -7,7 +7,7 @@ const baseURL = "http://api.giphy.com/v1/gifs/"
 const apiKey = "pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
 
 function App() {
-    const [gifs, setGifs] = React.useState(null);
+    /*const [gifs, setGifs] = React.useState(null);
 
     React.useEffect(async () => {
             try {
@@ -22,16 +22,34 @@ function App() {
             } catch (error) {
                 console.log(error);
             }
-    },[gifs]);
+    },[gifs]);*/
 
-    if (!gifs) return null;
+    const [{data, loading, error}, refetch] = useAxios(
+        "http://api.giphy.com/v1/gifs/trending?api_key=pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
+    )
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error!</p>
+
+    // if (!gifs) return null;
 
     return (
         <>
-        <ul>
-            {gifs.data.map(gif =>
-            <li key={gif.id}>{gif.url}</li>)}
-        </ul>
+        {/*<ul>*/}
+        {/*    <{gifs.data.map(gif =>*/}
+        {/*    <li key={gif.id}>{gif.url}</li>)}>*/}
+        {/*</ul>*/}
+
+            <div>
+                <button onClick={refetch}>refetch</button>
+                <p>{data.data[0].url}</p>
+                {data.data.map(gif =>
+                <img src={gif.images.original.url}/>)}
+                <img src={data.data[0].images.original.url}/>
+
+                {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
+
+            </div>
         </>
     );
 }
