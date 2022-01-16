@@ -39,6 +39,8 @@ function App() {
         <ul>
 
         </ul>
+            {/*<SearchField />*/}
+            <h2>Trending</h2>
             {gifs.data.map(gif =>
             <img key={gif.id} src={gif.images.original.url}/>)}
 
