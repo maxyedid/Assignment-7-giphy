@@ -6,24 +6,27 @@ function GifCard() {
 
     return (
         <div>
-            <input type="checkbox"
+            <input type="radio"
                    id="parameter1"
-                   name="new"
+                   name="parameters"
                    value="New"/>
             <label htmlFor="parameter1">Sort by newest</label>
-            <input type="checkbox"
+            <input type="radio"
                    id="parameter2"
-                   name="old"
+                   name="parameters"
                    value="Old"/>
             <label htmlFor="parameter2">Sort by oldest</label>
-            <input type="checkbox"
+            <input type="radio"
                    id="parameter3"
-                   name="small"
+                   name="parameters"
+
+
                    value="Small"/>
             <label htmlFor="parameter1">Sort by smallest</label>
-            <input type="checkbox"
+            <input type="radio"
                    id="parameter3"
-                   name="large"
+                   name="parameters"
+
                    value="Large"/>
             <label htmlFor="parameter1">Sort by largest</label>
         </div>
