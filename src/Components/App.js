@@ -10,6 +10,7 @@ const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 
 function App() {
     const [gifs, setGifs] = React.useState(null);
+    const [header, setHeader] = React.useState("Trending GIFs")
 
     // Load trending GIFs on mount
     React.useEffect(async () => {
@@ -40,6 +41,8 @@ function App() {
         } catch (error) {
             console.log(error);
         }
+
+        setHeader('Related GIFs to keyword "' + keyword + '":')
     }
 
     // const [{data, loading, error}, refetch] = useAxios(
@@ -60,7 +63,7 @@ function App() {
             <SearchField
                 updateGifs={updateGifs}/>
 
-            <h2>Trending</h2>
+            <h2>{header}</h2>
                 <div>
                     {gifs.data.map(gif =>
                     <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
