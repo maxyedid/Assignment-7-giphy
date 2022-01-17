@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
+import '../App.css';
 // import useAxios from 'axios-hooks';
 import SearchField from "./SearchField";
 import GifCard from "./GifCard";
@@ -56,10 +56,6 @@ function App() {
 
     return (
         <>
-        <ul>
-
-        </ul>
-            <section>
             <SearchField
                 updateGifs={updateGifs}/>
 
@@ -68,7 +64,6 @@ function App() {
                     {gifs.data.map(gif =>
                     <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
                 </div>
-            </section>
         </>
     );
 }
