@@ -59,6 +59,8 @@ function App() {
             <SearchField
                 updateGifs={updateGifs}/>
 
+            <GifCard />
+
             <h2>{header}</h2>
                 <div>
                     {gifs.data.map(gif =>
