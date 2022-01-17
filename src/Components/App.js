@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import '../App.css';
 // import useAxios from 'axios-hooks';
 import SearchField from "./SearchField";
 import GifCard from "./GifCard";
@@ -9,6 +10,7 @@ const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 
 function App() {
     const [gifs, setGifs] = React.useState(null);
+    const [header, setHeader] = React.useState("Trending GIFs")
 
     // Load trending GIFs on mount
     React.useEffect(async () => {
@@ -39,6 +41,8 @@ function App() {
         } catch (error) {
             console.log(error);
         }
+
+        setHeader('Related GIFs to keyword "' + keyword + '":')
     }
 
     // const [{data, loading, error}, refetch] = useAxios(
@@ -52,26 +56,14 @@ function App() {
 
     return (
         <>
-        <ul>
-
-        </ul>
             <SearchField
                 updateGifs={updateGifs}/>
 
-            <h2>Trending</h2>
-            {gifs.data.map(gif =>
-            <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
-
-            {/*<div>*/}
-            {/*    /!*<button onClick={refetch}>refetch</button>*!/*/}
-            {/*    /!*<p></p>*!/*/}
-            {/*    /!*{data.data.map(gif =>*!/*/}
-            {/*    /!*<img src={gif.images.original.url}/>)}*!/*/}
-            {/*    /!*<img src={data.data[0].images.original.url}/>*!/*/}
-
-            {/*    /!*<pre>{JSON.stringify(data, null, 2)}</pre>*!/*/}
-
-            {/*</div>*/}
+            <h2>{header}</h2>
+                <div>
+                    {gifs.data.map(gif =>
+                    <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
+                </div>
         </>
     );
 }
