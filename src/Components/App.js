@@ -1,37 +1,37 @@
 import React from 'react';
-import useAxios from 'axios-hooks';
 import axios from 'axios';
+// import useAxios from 'axios-hooks';
 import SearchField from "./SearchField";
 import GifCard from "./GifCard";
 
 const baseURL = "http://api.giphy.com/v1/gifs/"
-const apiKey = "pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
+const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 
 function App() {
     const [gifs, setGifs] = React.useState(null);
 
+    // Load trending GIFs on mount
     React.useEffect(async () => {
-            try {
-                await axios.get(baseURL
-                    + "trending?api_key="
-                    + apiKey)
-                    .then((response) => {
-                        console.log(response.data)
-                        console.log(response.data.data[0].images.original.url);
-                        setGifs(response.data);
-                    });
-            } catch (error) {
-                console.log(error);
-            }
-    },[]);
-
-    async function searchGifs() {
         try {
             await axios.get(baseURL
-                + "search?q=" + {gifs}
+                + "trending?api_key=" + apiKey)
+                .then((response) => {
+                    console.log(response.data)
+                    setGifs(response.data);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    },[]);
+
+    // Reload with GIFs related to keyword
+    const updateGifs = (keyword) => {
+        console.log({keyword});
+        try {
+            axios.get(baseURL
+                + "search?q=" + keyword
                 + "&api_key=" + apiKey)
                 .then((response) => {
-                    console.log({gifs})
                     console.log(response.data)
                     console.log(response.data.data[0].images.original.url);
                     setGifs(response.data);
@@ -39,11 +39,6 @@ function App() {
         } catch (error) {
             console.log(error);
         }
-    }
-
-    const updateGifs = (keyword) => {
-        setGifs(keyword);
-        searchGifs();
     }
 
     // const [{data, loading, error}, refetch] = useAxios(
@@ -61,11 +56,11 @@ function App() {
 
         </ul>
             <SearchField
-                updateGifs={{updateGifs}}
-            />
+                updateGifs={updateGifs}/>
+
             <h2>Trending</h2>
             {gifs.data.map(gif =>
-            <img key={gif.id} src={gif.images.original.url}/>)}
+            <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
 
             {/*<div>*/}
             {/*    /!*<button onClick={refetch}>refetch</button>*!/*/}
