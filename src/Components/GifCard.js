@@ -4,16 +4,16 @@ function GifCard(props) {
     // Sort by newest to oldest import date time
     // Sort by oldest to newest import date time
     const sortDate = order =>{
-        switch(order):{
+        switch(order) {
             case 'old': return this.setState({data : this.state.data.sort((a,b)=> a-b) })
             case 'new' : return this.setState({data : this.state.data.sort((a,b) => b-a)})
        }
     }
 
-    const sortSize = order =>{
-        switch(order):{
-        case 'small': return this.setState({data : this.state.data.sort((a,b)=> a-b) })
-        case 'large' : return this.setState({data : this.state.data.sort((a,b) => b-a)})
+    const sortSize = order => {
+        switch(order) {
+        case 'small': return this.setState({data : this.state.data.sort((a,b)=> a-b) });
+        case 'large' : return this.setState({data : this.state.data.sort((a,b) => b-a)});
         }
     }
 
