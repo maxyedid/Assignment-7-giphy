@@ -45,12 +45,18 @@ function App() {
         setHeader('Related GIFs to keyword "' + keyword + '":')
     }
 
-    // const [{data, loading, error}, refetch] = useAxios(
-    //     "http://api.giphy.com/v1/gifs/trending?api_key=pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
-    // )
+    // Sort GIFs
+    const sortGifs = (order) => {
+        switch(order) {
+            case 'old': return setGifs({gifs: gifs.data.sort((a,b) => a.import_datetime.localeCompare(b.import_datetime))})
+            case 'new' : return setGifs({gifs: gifs.data.sort((a,b) => b.import_datetime.localeCompare(a.import_datetime))})
+        }
 
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <p>Error!</p>
+        switch(order) {
+            case 'small': return setGifs({gifs: gifs.data.sort((a,b) => a.import_datetime.localeCompare(b.import_datetime))})
+            case 'large' : return setGifs({gifs: gifs.data.sort((a,b) => b.import_datetime.localeCompare(a.import_datetime))})
+        }
+    }
 
     if (!gifs) return null;
 
@@ -59,13 +65,13 @@ function App() {
             <SearchField
                 updateGifs={updateGifs}/>
 
-            <GifCard />
+            <GifCard
+                sortGifs={sortGifs}/>
 
             <h2>{header}</h2>
-                <div>
-                    {gifs.data.map(gif =>
-                    <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
-                </div>
+            <div>
+                {gifs.data.map(gif => <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
+            </div>
         </>
     );
 }
