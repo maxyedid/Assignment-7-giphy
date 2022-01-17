@@ -5,7 +5,7 @@ import '../App.css';
 import SearchField from "./SearchField";
 import GifCard from "./GifCard";
 
-const baseURL = "http://api.giphy.com/v1/gifs/"
+const baseURL = "https://api.giphy.com/v1/gifs/"
 const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 
 function App() {
