@@ -11,6 +11,7 @@ const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 function App() {
     const [gifs, setGifs] = React.useState(null);
     const [header, setHeader] = React.useState("Trending GIFs")
+    const [order, setOrder] = React.useState(true);
 
     // Load trending GIFs on mount
     React.useEffect(async () => {
@@ -24,6 +25,9 @@ function App() {
         } catch (error) {
             console.log(error);
         }
+
+
+
     },[]);
 
     // Reload with GIFs related to keyword
@@ -47,14 +51,15 @@ function App() {
 
     // Sort GIFs
     const sortGifs = (order) => {
-        switch(order) {
-            case 'old': return setGifs({gifs: gifs.data.sort((a,b) => a.import_datetime.localeCompare(b.import_datetime))})
-            case 'new' : return setGifs({gifs: gifs.data.sort((a,b) => b.import_datetime.localeCompare(a.import_datetime))})
+        if (order === "new") {
+            setGifs({data: gifs.data.sort((a, b) =>
+                b.import_datetime.localeCompare(a.import_datetime))})
+            console.log(gifs)
         }
-
-        switch(order) {
-            case 'small': return setGifs({gifs: gifs.data.sort((a,b) => a.import_datetime.localeCompare(b.import_datetime))})
-            case 'large' : return setGifs({gifs: gifs.data.sort((a,b) => b.import_datetime.localeCompare(a.import_datetime))})
+        if (order === "old") {
+            setGifs({data: gifs.data.sort((a, b) =>
+                    a.import_datetime.localeCompare(b.import_datetime))})
+            console.log(gifs)
         }
     }
 
@@ -67,6 +72,9 @@ function App() {
 
             <GifCard
                 sortGifs={sortGifs}/>
+
+            {/*{console.log(gifs.data.sort((a, b) => b.import_datetime.localeCompare(a.import_datetime)*/}
+            {/*))}*/}
 
             <h2>{header}</h2>
             <div>
