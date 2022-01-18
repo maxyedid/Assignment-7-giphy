@@ -2,7 +2,7 @@
   "name": "giphy",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://maxyedid.github.io/Assignment-7-giphy/",
+  "homepage": "https://lucylee-412.github.io/giphy-api",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
