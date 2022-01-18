@@ -11,6 +11,7 @@ const apiKey = "0kmUL2CDtL5x8AR5MxwRcIUgnpw8mxy2"
 function App() {
     const [gifs, setGifs] = React.useState(null);
     const [header, setHeader] = React.useState("Trending GIFs")
+    const [order, setOrder] = React.useState(true);
 
     // Load trending GIFs on mount
     React.useEffect(async () => {
@@ -24,6 +25,9 @@ function App() {
         } catch (error) {
             console.log(error);
         }
+
+
+
     },[]);
 
     // Reload with GIFs related to keyword
@@ -45,12 +49,20 @@ function App() {
         setHeader('Related GIFs to keyword "' + keyword + '":')
     }
 
-    // const [{data, loading, error}, refetch] = useAxios(
-    //     "http://api.giphy.com/v1/gifs/trending?api_key=pgpqAc3RpgbuB1cHj0YdXzdl5l3q0vQg"
-    // )
-
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <p>Error!</p>
+    // Sort GIFs
+    const sortGifs = (order) => {
+        // console.log("This is the order:" + order)
+        if (order === "new") {
+            setGifs({data: gifs.data.sort((a, b) =>
+                b.import_datetime.localeCompare(a.import_datetime))})
+            console.log(gifs)
+        }
+        if (order === "old") {
+            setGifs({data: gifs.data.sort((a, b) =>
+                    a.import_datetime.localeCompare(b.import_datetime))})
+            console.log(gifs)
+        }
+    }
 
     if (!gifs) return null;
 
@@ -59,11 +71,16 @@ function App() {
             <SearchField
                 updateGifs={updateGifs}/>
 
+            <GifCard
+                sortGifs={sortGifs}/>
+
+            {/*{console.log(gifs.data.sort((a, b) => b.import_datetime.localeCompare(a.import_datetime)*/}
+            {/*))}*/}
+
             <h2>{header}</h2>
-                <div>
-                    {gifs.data.map(gif =>
-                    <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
-                </div>
+            <div>
+                {gifs.data.map(gif => <img key={gif.id} src={gif.images.original.url} alt={gif.title}/>)}
+            </div>
         </>
     );
 }
