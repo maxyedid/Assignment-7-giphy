@@ -51,6 +51,7 @@ function App() {
 
     // Sort GIFs
     const sortGifs = (order) => {
+        // console.log("This is the order:" + order)
         if (order === "new") {
             setGifs({data: gifs.data.sort((a, b) =>
                 b.import_datetime.localeCompare(a.import_datetime))})
